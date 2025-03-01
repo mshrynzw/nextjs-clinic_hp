@@ -6,19 +6,19 @@ import Image from 'next/image';
 
 const images = [
   {
-    src: "https://images.unsplash.com/photo-1629196914168-3100e954a2d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    src: "https://images.unsplash.com/photo-1629904853716-f0bc54eea481?q=80&w=2070",
     alt: "待合室"
   },
   {
-    src: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    src: "https://images.unsplash.com/photo-1519494140681-8b17d830a3e9?q=80&w=2053",
     alt: "カウンセリングルーム"
   },
   {
-    src: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    src: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2070",
     alt: "リラクゼーションスペース"
   },
   {
-    src: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    src: "https://images.unsplash.com/photo-1504439468489-c8920d796a29?q=80&w=2071",
     alt: "診察室"
   }
 ];
@@ -28,17 +28,20 @@ export default function GallerySection() {
 
   useEffect(() => {
     if (sectionRef.current) {
-      gsap.from('.gallery-item', {
-        scale: 0.8,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.15,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-        }
-      });
+      gsap.fromTo('.gallery-item',
+        { opacity: 0, scale: 0.8 },  // 開始状態
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 80%',
+          }
+        }  // 終了状態
+      );
     }
   }, []);
 
@@ -52,7 +55,7 @@ export default function GallerySection() {
           {images.map((image, index) => (
             <div
               key={index}
-              className="gallery-item aspect-square overflow-hidden rounded-lg relative"
+              className="gallery-item opacity-0 aspect-square overflow-hidden rounded-lg relative"
             >
               <div className="w-full h-full relative">
                 <Image

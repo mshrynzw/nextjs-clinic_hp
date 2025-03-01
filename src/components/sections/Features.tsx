@@ -12,16 +12,20 @@ export default function FeaturesSection() {
     gsap.registerPlugin(ScrollTrigger);
 
     if (sectionRef.current) {
-      gsap.from('.feature-card', {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
+      gsap.fromTo('.feature-card',
+        { opacity: 0, y: 50 },  // 開始状態
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: '.feature-card',
+            start: 'top center',  // 要素のトップが画面中央に来たとき
+            toggleActions: 'play none none none',  // スクロールインで再生
+            markers: false  // デバッグ用マーカー（必要に応じてtrueに）
+          }
         }
-      });
+      );
     }
   }, []);
 
@@ -32,21 +36,21 @@ export default function FeaturesSection() {
           クリニックの特徴
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="feature-card">
+          <div className="feature-card opacity-0">
             <div className="icon-wrapper">
               <Calendar className="text-soft-teal" size={32} />
             </div>
             <h3 className="text-xl font-bold mb-2">柔軟な予約システム</h3>
             <p>オンラインで24時間予約可能。急なキャンセルにも対応しています。</p>
           </div>
-          <div className="feature-card">
+          <div className="feature-card opacity-0">
             <div className="icon-wrapper">
               <MessageSquare className="text-soft-teal" size={32} />
             </div>
             <h3 className="text-xl font-bold mb-2">オンライン相談</h3>
             <p>自宅からでも専門医に相談できる、便利なオンライン診療を提供しています。</p>
           </div>
-          <div className="feature-card">
+          <div className="feature-card opacity-0">
             <div className="icon-wrapper">
               <Phone className="text-soft-teal" size={32} />
             </div>

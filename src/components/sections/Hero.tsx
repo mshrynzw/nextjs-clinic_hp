@@ -10,12 +10,15 @@ export default function HeroSection() {
   useEffect(() => {
     // GSAPアニメーションをここに実装
     if (sectionRef.current) {
-      gsap.from('.hero-text', {
-        opacity: 0,
-        y: 20,
-        duration: 0.8,
-        stagger: 0.2,
-      });
+      gsap.fromTo('.hero-text', 
+        { opacity: 0, y: 20 },  // 開始状態
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.2,
+        }  // 終了状態
+      );
     }
   }, []);
 
@@ -26,14 +29,14 @@ export default function HeroSection() {
       </div>
       <div className="container mx-auto px-4 py-16 md:py-24 flex flex-col md:flex-row items-center relative z-10">
         <div className="md:w-1/2 mb-10 md:mb-0">
-          <h1 className="hero-text text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-deep-teal dark:text-soft-teal">
+          <h1 className="hero-text text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-deep-teal dark:text-soft-teal opacity-0">
             安心と信頼の<br />メンタルケア空間
           </h1>
-          <p className="hero-text text-lg mb-8 max-w-lg">
+          <p className="hero-text text-lg mb-8 max-w-lg opacity-0">
             あなたの心の健康をサポートする専門クリニック。
             経験豊かな医師とカウンセラーが、一人ひとりに合わせたケアを提供します。
           </p>
-          <div className="hero-text flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+          <div className="hero-text flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 opacity-0">
             <button className="btn-primary">
               初診予約 <ArrowRight size={16} className="ml-2" />
             </button>
